@@ -34,13 +34,6 @@ services:
       - "9115:9115"
     networks:
       - monitoring_network
-  docker_exporter:
-    image: lushtur/prometheus-docker-exporter:latest
-    container_name: docker_exporter
-    ports:
-      - "9120:9120"
-    networks:
-      - monitoring_network
 
   postgres:
     image: postgres:11
