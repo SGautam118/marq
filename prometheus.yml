@@ -10,9 +10,9 @@ scrape_configs:
     static_configs:
       - targets: ['node_exporter:9100']
 
-  - job_name: 'custom_exporter'
+  - job_name: 'cadvisor'
     static_configs:
-      - targets: ['localhost:8000']
+      - targets: ['54.177.239.162::8080']
 
 
   - job_name: 'blackbox_exporter'
