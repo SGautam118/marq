@@ -36,7 +36,7 @@ jobs:
 
       - name: Run Docker Exporter
         run: |
-         python container.py
+         python3 container.py
 
       - name: Install Docker Compose
         run: |
