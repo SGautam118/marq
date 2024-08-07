@@ -57,6 +57,7 @@ jobs:
           echo "$SSH_PRIVATE_KEY" > AGRF.pem
           chmod 600 AGRF.pem
           ssh -o StrictHostKeyChecking=no -i AGRF.pem $SSH_USER@$SSH_HOST << 'EOF'
+          python docker_exporter.py
             cd /home/ubuntu/marquez
             git pull origin main
             docker-compose pull
