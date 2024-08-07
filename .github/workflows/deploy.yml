@@ -25,18 +25,6 @@ jobs:
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.9'  # Specify the Python version to use
-
-      - name: Install dependencies
-        run: |
-         pip install docker prometheus_client
-
-      - name: Run Docker Exporter
-        run: |
-         python3 container.py
 
       - name: Install Docker Compose
         run: |
