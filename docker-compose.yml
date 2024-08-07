@@ -34,6 +34,18 @@ services:
       - "9115:9115"
     networks:
       - monitoring_network
+  cadvisor:
+    image: google/cadvisor:latest
+    container_name: cadvisor
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:ro
+      - /sys:/sys:ro
+      - /dev:/dev:ro
+
 
   postgres:
     image: postgres:11
