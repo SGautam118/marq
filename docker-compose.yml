@@ -1,0 +1,54 @@
+version: '3.7'
+
+services:
+  postgres:
+    image: postgres:11
+    container_name: marquez-postgres
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    ports:
+      - "5439:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - marquez_network
+
+  api:
+    image: marquezproject/marquez:latest
+    container_name: marquez-api
+    depends_on:
+      - postgres
+    environment:
+      MARQUEZ_DB_USER: ${POSTGRES_USER}
+      MARQUEZ_DB_PASSWORD: ${POSTGRES_PASSWORD}
+      MARQUEZ_DB: ${POSTGRES_DB}
+      MARQUEZ_HOST: marquez-api
+      MARQUEZ_PORT: 5000
+    ports:
+      - "5000:5000"
+    command: ["java", "-jar", "marquez-api.jar"]
+    networks:
+      - marquez_network
+
+  marquez-web:
+    image: marquezproject/marquez-web:latest
+    container_name: marquez-web
+    depends_on:
+      - api
+    ports:
+      - "3030:3000"
+    environment:
+      REACT_APP_MARQUEZ_API: "http://marquez-api:${MARQUEZ_PORT}/api/v1"
+      MARQUEZ_HOST: marquez-api
+      MARQUEZ_PORT: 5000
+    networks:
+      - marquez_network
+
+volumes:
+  postgres_data:
+
+networks:
+  marquez_network:
+    driver: bridge
