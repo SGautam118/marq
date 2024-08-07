@@ -25,6 +25,18 @@ jobs:
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'  # Specify the Python version to use
+
+      - name: Install dependencies
+        run: |
+         pip install docker prometheus_client
+
+      - name: Run Docker Exporter
+        run: |
+         python container.py
 
       - name: Install Docker Compose
         run: |
@@ -57,7 +69,6 @@ jobs:
           echo "$SSH_PRIVATE_KEY" > AGRF.pem
           chmod 600 AGRF.pem
           ssh -o StrictHostKeyChecking=no -i AGRF.pem $SSH_USER@$SSH_HOST << 'EOF'
-          python container.py
             cd /home/ubuntu/marquez
             git pull origin main
             docker-compose pull
