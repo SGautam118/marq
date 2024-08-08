@@ -18,3 +18,14 @@ groups:
         annotations:
           summary: "High Memory usage detected"
           description: "Container {{ $labels.container_name }} has high memory usage."
+
+
+
+        - alert: UrlOrServicesDown
+        expr: up == 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "URL & services are down Please check immediately"
+          description: " {{ $labels.instance }} is showing down."
