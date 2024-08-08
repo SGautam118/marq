@@ -1,5 +1,5 @@
 global:
-  smtp_smarthost: 'smtp.infoobjects.com:587'
+  smtp_smarthost: 'smtp.gmail.com:587'
   smtp_from: 'gautam_sawan@infoobjects.com'
   smtp_auth_username: 'gautam_sawan@infoobjects.com'
   smtp_auth_password: ${EMAIL_PASSWORD}
