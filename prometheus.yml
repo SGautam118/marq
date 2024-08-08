@@ -1,28 +1,28 @@
-- job_name: 'prometheus'
-  static_configs:
-    - targets: ['prometheus:9090']  # Assuming 'prometheus' is the service name in Docker Compose
+global:
+  scrape_interval: 15s
 
-- job_name: 'node_exporter'
-  static_configs:
-    - targets: ['node_exporter:9100']
+scrape_configs:
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['54.177.239.162:9090']
 
-- job_name: 'blackbox_exporter'
-  metrics_path: /probe
-  params:
-    module: [http_2xx]
-  static_configs:
-    - targets:
-      - http://54.177.239.162:3030/datasets  # Use Docker service namehttp://54.177.239.162:3030/
-      labels:
-        instance: marquez_web
-  relabel_configs:
-    - source_labels: [__address__]
-      target_label: __param_target
-    - source_labels: [__param_target]
-      target_label: instance
-    - target_label: __address__
-      replacement: blackbox_exporter:9115
+  - job_name: 'node_exporter'
+    static_configs:
+      - targets: ['node_exporter:9100']
 
-- job_name: 'cadvisor'
-  static_configs:
-    - targets: ['cadvisor:8080']
+  - job_name: 'blackbox_exporter'
+    metrics_path: /probe
+    params:
+      module: [http_2xx]
+    static_configs:
+      - targets:
+        - http://54.177.239.162:3030/datasets  # Replace with the target URL you want to monitor
+        labels:
+          instance: marquez_web
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: __param_target
+      - source_labels: [__param_target]
+        target_label: instance
+      - target_label: __address__
+        replacement: blackbox_exporter:9115
