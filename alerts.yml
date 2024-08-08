@@ -22,7 +22,7 @@ groups:
 
 
         - alert: UrlOrServicesDown
-        expr: up == 0
+        expr:  probe_success == 0
         for: 1m
         labels:
           severity: critical
