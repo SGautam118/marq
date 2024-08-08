@@ -30,3 +30,10 @@ scrape_configs:
   - job_name: 'cadvisor'
     static_configs:
       - targets: ['cadvisor:8080']  # Add configuration for cAdvisor
+alerting:
+  alertmanagers:
+    - static_configs:
+      - targets: ['alertmanager:9093']
+
+rule_files:
+  - "alerts.yml"  # Ensure this file exists with alert rules
