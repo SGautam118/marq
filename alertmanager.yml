@@ -1,8 +1,8 @@
 global:
-  smtp_smarthost: 'smtp.gmail.com:587'
-  smtp_from: 'alertmanager@your-domain.com'
-  smtp_auth_username: 'your-email@your-domain.com'
-  smtp_auth_password: 'your-email-password'
+  smtp_smarthost: 'smtp.infoobjects.com:587'
+  smtp_from: 'gautam_sawan@infoobjects.com'
+  smtp_auth_username: 'gautam_sawan@infoobjects.com'
+  smtp_auth_password: ${EMAIL_PASSWORD}
   smtp_require_tls: true
 
 route:
@@ -11,5 +11,5 @@ route:
 receivers:
   - name: 'email-alerts'
     email_configs:
-      - to: 'alert-recipient@your-domain.com'
+      - to: 'prateek.agarwal@infoobjects.com'
         send_resolved: true
