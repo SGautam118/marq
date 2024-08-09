@@ -39,6 +39,7 @@ scrape_configs:
 #   - "alerts.yml"  # Ensure this file exists with alert rules
 alerting:
   alertmanagers:
-    - scheme: http
-      static_configs:
-        - targets: [ 'alertmanager:9093' ]
+  - static_configs:
+    - targets:
+      - '54.177.239.162:9093'
+
