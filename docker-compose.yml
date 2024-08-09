@@ -1,4 +1,4 @@
-version: '3.7'
+version: '3.8'
 
 services:
   prometheus:
@@ -49,19 +49,23 @@ services:
       - monitoring_network
   
   alertmanager:
-    image: prom/alertmanager:v0.23.0
-    restart: unless-stopped
+    image: prom/alertmanager:v0.23.0  # Use the appropriate image version
+    container_name: alertmanager
+    volumes:
+      - alertmanager-data:/data:rw
     ports:
       - "9093:9093"
-    volumes:
-      - "./alertmanager:/config"
-      - alertmanager-data:/data
-    command: --config.file=/config/alertmanager.yml --log.level=debug
-
+    configs:
+      - source: alertmanager-config
+        target: /etc/alertmanager/alertmanager.yml
 
 volumes:
-
   alertmanager-data:
+
+configs:
+  alertmanager-config:
+    file: ./alertmanager.yml
+
 
 
   postgres:
