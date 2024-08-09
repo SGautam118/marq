@@ -49,14 +49,19 @@ services:
       - monitoring_network
   
   alertmanager:
-    image: prom/alertmanager:latest
-    container_name: alertmanager
-    volumes:
-      - ./alertmanager.yml:/etc/alertmanager/alertmanager.yml
+    image: prom/alertmanager:v0.23.0
+    restart: unless-stopped
     ports:
       - "9093:9093"
-    networks:
-      - monitoring_network
+    volumes:
+      - "./alertmanager:/config"
+      - alertmanager-data:/data
+    command: --config.file=/config/alertmanager.yml --log.level=debug
+
+
+volumes:
+
+  alertmanager-data:
 
 
   postgres:
