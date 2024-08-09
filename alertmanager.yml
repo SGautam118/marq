@@ -1,15 +1,30 @@
-global:
-  smtp_smarthost: 'smtp.gmail.com:587'
-  smtp_from: 'gautam_sawan@infoobjects.com'
-  smtp_auth_username: 'gautam_sawan@infoobjects.com'
-  smtp_auth_password: ${EMAIL_PASSWORD}
-  smtp_require_tls: true
+# global:
+#   smtp_smarthost: 'smtp.gmail.com:587'
+#   smtp_from: 'gautam_sawan@infoobjects.com'
+#   smtp_auth_username: 'gautam_sawan@infoobjects.com'
+#   smtp_auth_password: ${EMAIL_PASSWORD}
+#   smtp_require_tls: true
+
+# route:
+#   receiver: 'email-alerts'
+
+# receivers:
+#   - name: 'email-alerts'
+#     email_configs:
+#       - to: 'prateek.agarwal@infoobjects.com'
+#         send_resolved: true
 
 route:
-  receiver: 'email-alerts'
+  receiver: 'mail'
+  repeat_interval: 4h
+  group_by: [ alertname ]
+
 
 receivers:
-  - name: 'email-alerts'
+  - name: 'mail'
     email_configs:
-      - to: 'prateek.agarwal@infoobjects.com'
-        send_resolved: true
+      - smarthost: 'smtp.gmail.com:465'
+        auth_username: 'gautam_sawan@infoobjects.com'
+        auth_password: "${EMAIL_PASSWORD}"
+        from: 'gautam_sawan@infoobjects.com'
+        to: 'prateek.agarwal@infoobjects.com'
