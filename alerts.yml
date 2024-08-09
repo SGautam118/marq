@@ -29,3 +29,13 @@ groups:
         annotations:
           summary: "URL & services are down Please check immediately"
           description: " {{ $labels.instance }} is showing down."
+                
+  - name: test
+    rules:
+     - alert: TestAlert
+       expr: vector(1)
+       for: 1m
+       labels:
+          severity: critical
+       annotations:
+        summary: "Test alert"
