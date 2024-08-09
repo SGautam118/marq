@@ -1,5 +1,4 @@
 version: '3.8'
-
 services:
   prometheus:
     image: prom/prometheus:latest
@@ -59,14 +58,6 @@ services:
       - source: alertmanager-config
         target: /etc/alertmanager/alertmanager.yml
 
-volumes:
-  alertmanager-data:
-
-configs:
-  alertmanager-config:
-    file: ./alertmanager.yml
-
-
 
   postgres:
     image: postgres:11
@@ -115,6 +106,11 @@ configs:
 
 volumes:
   postgres_data:
+  alertmanager-data:
+
+configs:
+  alertmanager-config:
+    file: ./alertmanager.yml
 
 networks:
   marquez_network:
