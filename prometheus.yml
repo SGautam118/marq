@@ -37,6 +37,10 @@ scrape_configs:
 
 # rule_files:
 #   - "alerts.yml"  # Ensure this file exists with alert rules
+  - job_name: 'marquez-api'
+    metrics_path: /metrics
+    static_configs:
+      - targets: ['54.177.239.162:5000']
 alerting:
   alertmanagers:
   - static_configs:
