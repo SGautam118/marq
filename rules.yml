@@ -1,0 +1,41 @@
+groups:
+  - name: example
+    rules:
+      - alert: HighCpuUsage
+        expr: rate(container_cpu_usage_seconds_total{container_name!="*",container_name!="*"}[5m]) > 0.9
+        for: 5m
+        labels:
+          severity: critical
+        annotations:
+          summary: "High CPU usage detected"
+          description: "Container {{ $labels.container_name }} has high CPU usage."
+
+      # - alert: HighMemoryUsage
+      #   expr: container_memory_usage_bytes > 0.9 * container_spec_memory_limit_bytes
+      #   for: 5m
+      #   labels:
+      #     severity: critical
+      #   annotations:
+      #     summary: "High Memory usage detected"
+      #     description: "Container {{ $labels.container_name }} has high memory usage."
+
+
+
+      - alert: UrlOrServicesDown
+        expr:  probe_success == 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "URL & services are down Please check immediately"
+          description: " {{ $labels.instance }} is showing down."
+                
+  - name: test
+    rules:
+     - alert: TestAlert
+       expr: vector(1)
+       for: 1m
+       labels:
+          severity: critical
+       annotations:
+        summary: "Test alert"
