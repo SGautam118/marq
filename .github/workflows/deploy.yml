@@ -6,7 +6,12 @@ on:
       environment:
         description: 'Deployment Environment'
         required: true
-        default: 'production' # Optional: You can provide a default value
+        default: 'dev'
+        type: choice
+        options:
+          - dev
+          - reg
+          - prod
 
 jobs:
   deploy:
