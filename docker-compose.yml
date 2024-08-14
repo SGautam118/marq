@@ -47,16 +47,28 @@ services:
     networks:
       - monitoring_network
   
+  # alertmanager:
+  #   image: prom/alertmanager:v0.23.0  # Use the appropriate image version
+  #   container_name: alertmanager
+  #   volumes:
+  #     - alertmanager-data:/data:rw
+  #   ports:
+  #     - "9093:9093"
+  #   configs:
+  #     - source: alertmanager-config
+  #       target: /etc/alertmanager/alertmanager.yml
   alertmanager:
     image: prom/alertmanager:v0.23.0  # Use the appropriate image version
     container_name: alertmanager
     volumes:
-      - alertmanager-data:/data:rw
+      - ./alertmanager.yml:/etc/alertmanager/alertmanager.yml  # Mount configuration file
+      - alertmanager-data:/data  # Mount for Alertmanager data
     ports:
       - "9093:9093"
-    configs:
-      - source: alertmanager-config
-        target: /etc/alertmanager/alertmanager.yml
+
+volumes:
+  alertmanager-data:
+
 
 
   postgres:
