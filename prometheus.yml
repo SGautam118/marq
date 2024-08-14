@@ -44,6 +44,6 @@ alerting:
   alertmanagers:
   - static_configs:
     - targets:
-      - ['54.177.239.162:9093']
+      - '54.177.239.162:9093'
 rule_files:
   - "rules.yml"  # Ensure this file exists with alert rules
