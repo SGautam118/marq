@@ -5,6 +5,7 @@ services:
     container_name: prometheus
     volumes:
       - ./prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus-data:/data 
     ports:
       - "9090:9090"
     networks:
@@ -113,6 +114,7 @@ services:
 
 volumes:
   postgres_data:
+  prometheus-data:
   alertmanager-data:
 
 configs:
