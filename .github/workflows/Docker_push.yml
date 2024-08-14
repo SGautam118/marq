@@ -28,6 +28,10 @@ jobs:
           docker-compose --version  # Verify installation
 
       - name: Build Docker images
+        env:
+         POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
+         POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+         POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
         run: |
           docker-compose build
 
