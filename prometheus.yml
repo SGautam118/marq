@@ -46,4 +46,4 @@ alerting:
     - targets:
       - ['alertmanager:9093']
 rule_files:
-  - "alerts.yml"  # Ensure this file exists with alert rules
+  - "rules.yml"  # Ensure this file exists with alert rules
