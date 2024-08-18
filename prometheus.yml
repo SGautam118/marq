@@ -14,7 +14,7 @@ scrape_configs:
     metrics_path: /probe
     params:
       module: [http_2xx]
-    static_configs:rules.yml"
+    static_configs:
       - targets:
         - http://54.177.239.162:3030/datasets/ # Use Docker service name instead of IP
         labels:
