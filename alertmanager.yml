@@ -23,7 +23,7 @@ route:
 receivers:
   - name: 'mail'
     email_configs:
-      - smarthost: 'smtp.gmail.com:465'
+      - smarthost: 'smtp.gmail.com:587'
         auth_username: 'gautam_sawan@infoobjects.com'
         auth_password: "${EMAIL_PASSWORD}"
         from: 'gautam_sawan@infoobjects.com'
