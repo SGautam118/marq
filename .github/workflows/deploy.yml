@@ -2,6 +2,16 @@ name: Deploy to EC2
 
 on:
   workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Deployment environment'
+        required: true
+        type: choice
+        options:
+          - dev
+          - staging
+          - prod
+        default: 'dev'
 
 jobs:
   deploy:
