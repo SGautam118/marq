@@ -1,4 +1,5 @@
 version: '3.8'
+
 services:
   prometheus:
     image: prom/prometheus:latest
@@ -6,7 +7,7 @@ services:
     volumes:
       - ./prometheus.yml:/etc/prometheus/prometheus.yml
       - ./prometheus/rules.yml:/etc/prometheus/rules.yml
-      - prometheus-data:/data 
+      - prometheus-data:/data
     ports:
       - "9090:9090"
     networks:
@@ -48,25 +49,17 @@ services:
       - /var/lib/docker:/var/lib/docker:ro
     networks:
       - monitoring_network
-  
-  # alertmanager:
-  #   image: prom/alertmanager:v0.23.0  # Use the appropriate image version
-  #   container_name: alertmanager
-  #   volumes:
-  #     - alertmanager-data:/data:rw
-  #   ports:
-  #     - "9093:9093"
-  #   configs:
-  #     - source: alertmanager-config
-  #       target: /etc/alertmanager/alertmanager.yml
+
   alertmanager:
-    image: prom/alertmanager:v0.23.0  # Use the appropriate image version
+    image: prom/alertmanager:v0.23.0
     container_name: alertmanager
     volumes:
-      - ./alertmanager.yml:/etc/alertmanager/alertmanager.yml  # Mount configuration file
-      - alertmanager-data:/data  # Mount for Alertmanager data
+      - ./alertmanager.yml:/etc/alertmanager/alertmanager.yml
+      - alertmanager-data:/data
     ports:
       - "9093:9093"
+    networks:
+      - monitoring_network
 
   postgres:
     image: postgres:11
@@ -117,10 +110,6 @@ volumes:
   postgres_data:
   prometheus-data:
   alertmanager-data:
-
-configs:
-  alertmanager-config:
-    file: ./alertmanager.yml
 
 networks:
   marquez_network:
