@@ -25,6 +25,7 @@ receivers:
     email_configs:
       - smarthost: 'smtp.gmail.com:587'
         auth_username: 'gautam_sawan@infoobjects.com'
-        auth_password: "${{ secrets.EMAIL_PASSWORD_DEV }}"
+        auth_password: 'evwn ukel dkle pxbh' 
+#"${{ secrets.EMAIL_PASSWORD_DEV }}"
         from: 'gautam_sawan@infoobjects.com'
         to: 'prateek.agarwal@infoobjects.com'
