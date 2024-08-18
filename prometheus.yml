@@ -70,7 +70,7 @@ scrape_configs:
       module: [http_2xx]
     static_configs:
       - targets:
-        - http://blackbox_exporter:9115/probe  # Use Docker service name instead of IP
+        - http://54.177.239.162:3030/datasets/  # Use Docker service name instead of IP
         labels:
           instance: marquez_web
     relabel_configs:
