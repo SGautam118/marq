@@ -88,7 +88,7 @@ scrape_configs:
   - job_name: 'marquez-api'
     metrics_path: /metrics
     static_configs:
-      - targets: ['marquez-api:5000']  # Use Docker service name instead of IP
+      - targets: ['54.177.239.162:5000']  # Use Docker service name instead of IP
 
 alerting:
   alertmanagers:
