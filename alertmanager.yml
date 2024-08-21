@@ -24,18 +24,18 @@ receivers:
         to: 'prateek.agarwal@infoobjects.com'
         send_resolved: true
         html: |
-  <html>
-  <body>
-    <h2>[ALERT] {{ .CommonLabels.alertname }}</h2>
-    <p>Status: {{ .Status }}</p>
-    <p>Description: {{ .Annotations.description }}</p>
-    <ul>
-      {{ range .Alerts }}
-        <li>Metric: {{ .Labels.alertname }}</li>
-      {{ end }}
-    </ul>
-  </body>
-  </html>
+          <html>
+          <body>
+            <h2>[ALERT] {{ .CommonLabels.alertname }}</h2>
+            <p>Status: {{ .Status }}</p>
+            <p>Description: {{ .Annotations.description }}</p>
+            <ul>
+              {{ range .Alerts }}
+                <li>Metric: {{ .Labels.alertname }}</li>
+              {{ end }}
+            </ul>
+          </body>
+          </html>
 
           # <html>
           # <body>
