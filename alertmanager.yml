@@ -1,31 +1,53 @@
-# global:
-#   smtp_smarthost: 'smtp.gmail.com:587'
-#   smtp_from: 'gautam_sawan@infoobjects.com'
-#   smtp_auth_username: 'gautam_sawan@infoobjects.com'
-#   smtp_auth_password: ${EMAIL_PASSWORD}
-#   smtp_require_tls: true
+# Global SMTP Configuration
+global:
+  smtp_smarthost: 'smtp.gmail.com:587'
+  smtp_from: 'gautam_sawan@infoobjects.com'
+  smtp_auth_username: 'gautam_sawan@infoobjects.com'
+  smtp_auth_password: '${EMAIL_PASSWORD}'  # Use environment variable for sensitive information
+  smtp_require_tls: true
 
-# route:
-#   receiver: 'email-alerts'
-
-# receivers:
-#   - name: 'email-alerts'
-#     email_configs:
-#       - to: 'prateek.agarwal@infoobjects.com'
-#         send_resolved: true
-
+# Route Configuration
 route:
   receiver: 'mail'
   repeat_interval: 4h
   group_by: [ alertname ]
 
-
+# Receivers Configuration
 receivers:
   - name: 'mail'
     email_configs:
       - smarthost: 'smtp.gmail.com:587'
         auth_username: 'gautam_sawan@infoobjects.com'
-        auth_password: 'evwn ukel dkle pxbh' 
-#"${{ secrets.EMAIL_PASSWORD_DEV }}"
+        auth_password: 'evwn ukel dkle pxbh'
+        #"${{ secrets.EMAIL_PASSWORD_DEV }}"
         from: 'gautam_sawan@infoobjects.com'
         to: 'prateek.agarwal@infoobjects.com'
+        send_resolved: true
+        html: |
+          <html>
+          <body>
+            <h2>[ALERT] {{ .CommonLabels.alertname }}</h2>
+            <p>Status: {{ .Status }}</p>
+            <p>Instance: {{ .CommonLabels.instance }}</p>
+            <p>Triggered At: {{ .StartsAt }}</p>
+            <p>Description: {{ .Annotations.description }}</p>
+            <p>Metrics and Details:</p>
+            <ul>
+              {{ range .Alerts }}
+                <li>
+                  Metric: {{ .Labels.alertname }}<br>
+                  Value: {{ .Annotations.value }}<br>
+                  Threshold: {{ .Annotations.threshold }}
+                </li>
+              {{ end }}
+            </ul>
+            <p>Suggested Actions:</p>
+            <ul>
+              <li>Action Item 1</li>
+              <li>Action Item 2</li>
+              <li>Action Item 3</li>
+            </ul>
+            <p>Additional Context: {{ .Annotations.context }}</p>
+            <p>Links: <a href="{{ .Annotations.dashboard_url }}">Prometheus Dashboard</a></p>
+          </body>
+          </html>
