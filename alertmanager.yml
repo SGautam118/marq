@@ -24,30 +24,43 @@ receivers:
         to: 'prateek.agarwal@infoobjects.com'
         send_resolved: true
         html: |
-          <html>
-          <body>
-            <h2>[ALERT] {{ .CommonLabels.alertname }}</h2>
-            <p>Status: {{ .Status }}</p>
-            <p>Instance: {{ .CommonLabels.instance }}</p>
-            <p>Triggered At: {{ .StartsAt }}</p>
-            <p>Description: {{ .Annotations.description }}</p>
-            <p>Metrics and Details:</p>
-            <ul>
-              {{ range .Alerts }}
-                <li>
-                  Metric: {{ .Labels.alertname }}<br>
-                  Value: {{ .Annotations.value }}<br>
-                  Threshold: {{ .Annotations.threshold }}
-                </li>
-              {{ end }}
-            </ul>
-            <p>Suggested Actions:</p>
-            <ul>
-              <li>Action Item 1</li>
-              <li>Action Item 2</li>
-              <li>Action Item 3</li>
-            </ul>
-            <p>Additional Context: {{ .Annotations.context }}</p>
-            <p>Links: <a href="{{ .Annotations.dashboard_url }}">Prometheus Dashboard</a></p>
-          </body>
-          </html>
+  <html>
+  <body>
+    <h2>[ALERT] {{ .CommonLabels.alertname }}</h2>
+    <p>Status: {{ .Status }}</p>
+    <p>Description: {{ .Annotations.description }}</p>
+    <ul>
+      {{ range .Alerts }}
+        <li>Metric: {{ .Labels.alertname }}</li>
+      {{ end }}
+    </ul>
+  </body>
+  </html>
+
+          # <html>
+          # <body>
+          #   <h2>[ALERT] {{ .CommonLabels.alertname }}</h2>
+          #   <p>Status: {{ .Status }}</p>
+          #   <p>Instance: {{ .CommonLabels.instance }}</p>
+          #   <p>Triggered At: {{ .StartsAt }}</p>
+          #   <p>Description: {{ .Annotations.description }}</p>
+          #   <p>Metrics and Details:</p>
+          #   <ul>
+          #     {{ range .Alerts }}
+          #       <li>
+          #         Metric: {{ .Labels.alertname }}<br>
+          #         Value: {{ .Annotations.value }}<br>
+          #         Threshold: {{ .Annotations.threshold }}
+          #       </li>
+          #     {{ end }}
+          #   </ul>
+          #   <p>Suggested Actions:</p>
+          #   <ul>
+          #     <li>Action Item 1</li>
+          #     <li>Action Item 2</li>
+          #     <li>Action Item 3</li>
+          #   </ul>
+          #   <p>Additional Context: {{ .Annotations.context }}</p>
+          #   <p>Links: <a href="{{ .Annotations.dashboard_url }}">Prometheus Dashboard</a></p>
+          # </body>
+          # </html>
