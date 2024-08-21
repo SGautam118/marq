@@ -13,3 +13,31 @@ receivers:
 #"${{ secrets.EMAIL_PASSWORD_DEV }}"
         from: 'gautam_sawan@infoobjects.com'
         to: 'prateek.agarwal@infoobjects.com'
+        send_resolved: true
+        html: |
+          <html>
+          <body>
+            <h2>[ALERT] {{ .CommonLabels.alertname }}</h2>
+            <p>Status: {{ .Status }}</p>
+            <p>Triggered At: {{ .StartsAt }}</p>
+            <p><strong>Labels:</strong></p>
+            <ul>
+              <li><strong>Alert Name:</strong> {{ .CommonLabels.alertname }}</li>
+              <li><strong>Instance:</strong> {{ .CommonLabels.instance }}</li>
+              <li><strong>Job:</strong> {{ .CommonLabels.job }}</li>
+              <li><strong>Severity:</strong> {{ .CommonLabels.severity }}</li>
+            </ul>
+            <p><strong>Annotations:</strong></p>
+            <ul>
+              <li><strong>Description:</strong> {{ .Annotations.description }}</li>
+              <li><strong>Summary:</strong> {{ .Annotations.summary }}</li>
+              <li><strong>Source:</strong> {{ .Annotations.source }}</li>
+            </ul>
+            <p><strong>Additional Information:</strong></p>
+            <ul>
+              <li>Alert ID: {{ .AlertID }}</li>
+              <li>Alert Rule: {{ .Rule }}</li>
+            </ul>
+            <p>For more details, visit the <a href="{{ .Annotations.dashboard_url }}">Prometheus Dashboard</a></p>
+          </body>
+          </html>
