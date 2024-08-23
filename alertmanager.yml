@@ -18,7 +18,7 @@ receivers:
           <html>
           <body>
             <h2>[ALERT] {{ .CommonLabels.alertname }}</h2>
-            <p>Status: {{ .status }}</p>
+            <p>status: {{ .status }}</p>
             # <p>Triggered At: {{ .startsAt }}</p>
             <p><strong>Labels:</strong></p>
             <ul>
