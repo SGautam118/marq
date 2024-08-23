@@ -18,24 +18,19 @@ receivers:
           <html>
           <body>
             <h2>[ALERT] {{ .labels.alertname }}</h2>
-            <p>status: {{ .status.state }}</p>
-            <p>Triggered At: {{ .startsAt }}</p>
-            <p><strong>Labels:</strong></p>
+            <p><strong>Status:</strong> {{ .status.state }}</p>
+            <p><strong>Triggered At:</strong> {{ .startsAt }}</p>  
+            <h3>Labels:</h3>
             <ul>
-              <li><strong>Alert Name:</strong> {{ .labels.alertname }}</li>
-              <li><strong>Instance:</strong> {{ .labels.instance }}</li>
-              <li><strong>Job:</strong> {{ .labels.job }}</li>
-              <li><strong>Severity:</strong> {{ .labels.severity }}</li>
+            <li><strong>Alert Name:</strong> {{ .labels.alertname }}</li>
+            <li><strong>Instance:</strong> {{ .labels.instance }}</li>
+            <li><strong>Job:</strong> {{ .labels.job }}</li>
+            <li><strong>Severity:</strong> {{ .labels.severity }}</li>
             </ul>
-            <p><strong>annotations:</strong></p>
+            <h3>Annotations:</h3>
             <ul>
-              <li><strong>Description:</strong> {{ .annotations.description }}</li>
-              <li><strong>Summary:</strong> {{ .annotations.summary }}</li>
-            </ul>
-            # <p><strong>Additional Information:</strong></p>
-            # <ul>
-            #   <li>Alert ID: {{ .AlertID }}</li>
-            #   <li>Alert Rule: {{ .Rule }}</li>
-            # </ul>
+               <li><strong>Description:</strong> {{ .annotations.description }}</li>
+               <li><strong>Summary:</strong> {{ .annotations.summary }}</li>
+                  </ul>
           </body>
           </html>
