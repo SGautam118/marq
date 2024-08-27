@@ -3,7 +3,8 @@ route:
   repeat_interval: 4h
   group_by: [ alertname ]
 
-
+templates:
+  - '/etc/config/email.tmpl'
 receivers:
   - name: 'mail'
     email_configs:
@@ -14,29 +15,4 @@ receivers:
         from: 'gautam_sawan@infoobjects.com'
         to: 'gautam_sawan@infoobjects.com'
         send_resolved: true
-        html: |
-            <html>
-            <body>
-              <h2>[ALERT] {{ .labels.alertname }}</h2>
-              
-              <p><strong>Status:</strong> {{ .status.state }}</p>
-              <p><strong>Triggered At:</strong> {{ .startsAt }}</p>
-              <p><strong>Resolved At:</strong> {{ .endsAt }}</p>
-          
-              <h3>Labels:</h3>
-              <ul>
-                <li><strong>Alert Name:</strong> {{ .labels.alertname }}</li>
-                <li><strong>Instance:</strong> {{ .labels.instance }}</li>
-                <li><strong>Job:</strong> {{ .labels.job }}</li>
-                <li><strong>Severity:</strong> {{ .labels.severity }}</li>
-              </ul>
-          
-              <h3>Annotations:</h3>
-              <ul>
-                <li><strong>Description:</strong> {{ .annotations.description }}</li>
-                <li><strong>Summary:</strong> {{ .annotations.summary }}</li>
-              </ul>
-          
-              <p><strong>Generator URL:</strong> <a href="{{ .generatorURL }}">{{ .generatorURL }}</a></p>
-            </body>
-            </html>
+      
