@@ -1,6 +1,6 @@
 groups:
-# - name: probe_alerts
-#   rules:
+- name: probe_alerts
+  rules:
 #   - alert: ProbeFailed
 #     expr: probe_success == 0
 #     for: 1m
