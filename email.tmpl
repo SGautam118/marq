@@ -1,0 +1,23 @@
+{{ define "__subject" }} [{{ .Status | toUpper }}{{ if eq .Status "firing" }}:{{ .Alerts.Firing | len }}-{{ .CommonLabels.alertname }}-{{ .CommonLabels.severity }}-{{ .CommonLabels.instance }}{{ end }}]{{ end}}
+{{ define "email.custom.txt" }}
+{{ if gt (len .Alerts.Firing) 0 -}}
+Total firing alerts: {{ .Alerts.Firing | len }}
+Total resolved alerts: {{ .Alerts.Resolved | len }}
+{{ end }}
+## Firing Alerts
+{{ range .Alerts.Firing }}
+-----
+Time: {{ .StartsAt }}
+Summary: {{ if .Annotations.summary}} {{.Annotations.summary}} {{end}}
+Description: {{ if .Annotations.description}} {{.Annotations.description}} {{end}}
+-----
+{{ end }}
+##Resolved Alerts
+{{ range .Alerts.Resolved }}
+-----
+Time: {{ .StartsAt }} -- {{ .EndsAt }}
+Summary: {{ if .Annotations.summary}} {{.Annotations.summary}} {{end}}
+Description: {{ if .Annotations.description}} {{.Annotations.description}} {{end}}
+-----
+{{ end }}
+{{end}}
