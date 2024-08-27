@@ -16,7 +16,7 @@ groups:
     for: 0m
     labels:
       severity: critical
-      service: {{ $labels.instance }} is down
+      service: probe endpoint service is down
       application: URL Endpoint
       messagecode: URL is not responding
     annotations:
