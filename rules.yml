@@ -1,11 +1,24 @@
 groups:
-- name: probe_alerts
-  rules:
-  - alert: ProbeFailed
+# - name: probe_alerts
+#   rules:
+#   - alert: ProbeFailed
+#     expr: probe_success == 0
+#     for: 1m
+#     labels:
+#       severity: critical
+#     annotations:
+#       summary: "Probe failure detected for {{ $labels.instance }}"
+#       description: "The probe for job {{ $labels.instance }} has failed. Check the exporter or network."
+
+
+  - alert: ProbFailed
     expr: probe_success == 0
-    for: 1m
+    for: 0m
     labels:
       severity: critical
+      service: {{ $labels.instance }} is down
+      application: URL Endpoint
+      messagecode: URL is not responding
     annotations:
-      summary: "Probe failure detected for {{ $labels.instance }}"
-      description: "The probe for job {{ $labels.instance }} has failed. Check the exporter or network."
+      summary: Probe for URL is  missing (instance {{ $labels.instance }})
+      description: "probe POD/service has disappeared. An app service component might be crashed.\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
