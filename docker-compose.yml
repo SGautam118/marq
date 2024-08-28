@@ -91,6 +91,20 @@ services:
     command: ["java", "-jar", "marquez-api.jar"]
     networks:
       - marquez_network
+      
+  nginx:
+    image: nginx:latest
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+      - ./certs:/etc/nginx/certs
+    depends_on:
+      - marquez-web
+    networks:
+      - marquez_network
+
 
   marquez-web:
     image: marquezproject/marquez-web:latest
