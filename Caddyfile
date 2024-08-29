@@ -1,0 +1,9 @@
+# Redirect HTTP to HTTPS
+http:// {
+    redir https://{host}{uri}
+}
+
+# HTTPS configuration
+https:// {
+    reverse_proxy / marquez-web:3000
+}
